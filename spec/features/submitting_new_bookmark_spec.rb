@@ -9,4 +9,13 @@ feature 'Adding a new bookmark' do
 
     expect(page).to have_link('Test Bookmark', href: 'http://www.testbookmark.com')
   end
+
+  scenario "raises an error when submitting incorrect link" do
+    visit('/bookmarks/new')
+    fill_in('url', with: 'not a bookmark')
+    click_button('Submit')
+
+    expect(page).not_to have_content "not a bookmark"
+    expect(page).to have_content "Bookmark invalid"
+  end
 end
