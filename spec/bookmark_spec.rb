@@ -54,4 +54,17 @@ describe Bookmark do
       expect(updated_bookmark.url).to eq 'http://www.twitter.com'
     end
   end
+
+  describe ".find" do 
+    it 'returns the requested bookmark object' do
+      bookmark = Bookmark.create(title: 'Facebook', url: 'http://www.facebook.com')
+
+      result = Bookmark.find(id: bookmark.id)
+
+      expect(result).to be_a Bookmark
+      expect(result.id).to eq bookmark.id
+      expect(result.title).to eq 'Facebook'
+      expect(result.url).to eq 'http://www.facebook.com'
+    end
+  end
 end
